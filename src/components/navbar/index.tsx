@@ -1,0 +1,107 @@
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from '../ui/navigation-menu';
+import ModeToggle from '../mode-toggle';
+import { menus } from '@/assets/datas/menu';
+import VeraLogo from '@/assets/images/vera-logo.png';
+
+const Navbar = () => {
+  const [activeHash, setActiveHash] = useState('');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+  return (
+    <>
+      <div className="hidden md:block fixed top-0 z-50 shadow-border w-full">
+        <div className="flex items-center justify-between gap-2 px-20 py-3">
+          <Link href={'/'}>
+            <Image src={VeraLogo} alt="vera-logo" className="w-8" />
+          </Link>
+          <NavigationMenu>
+            <NavigationMenuList className="flex gap-4 items-center">
+              {menus.map((menu) => {
+                const isActive = activeHash == menu.href;
+                return (
+                  <NavigationMenuItem
+                    key={menu.name}
+                    className={`px-3 py-1 ${
+                      isActive
+                        ? 'text-primary font-semibold dark:text-primary-foreground'
+                        : 'text-muted-foreground'
+                    }`}
+                  >
+                    <Link
+                      href={menu.href}
+                      className="flex gap-2 items-center text-sm"
+                      onClick={() => setActiveHash(menu.href)}
+                    >
+                      {/* {isActive && (
+                        <menu.icon
+                          className={`w-4 h-4 ${
+                            isActive
+                              ? 'text-primary dark:text-primary-foreground'
+                              : 'text-muted-foreground'
+                          }`}
+                        />
+                      )} */}
+                      {menu.name}
+                    </Link>
+                  </NavigationMenuItem>
+                );
+              })}
+              <ModeToggle />
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+      </div>
+      <div className="absolute md:hidden bottom-4 left-2 right-2 z-50 rounded-xl shadow dark:shadow-lg shadow-border bg-background dark:bg-neutral-900">
+        <NavigationMenu className="py-2 px-2">
+          <div className="!w-[100vw]">
+            <NavigationMenuList className="flex justify-around items-center">
+              {menus.map((menu) => {
+                const isActive = activeHash === menu.href;
+                return (
+                  <NavigationMenuItem
+                    key={menu.name}
+                    className={`px-2 py-1 rounded-full ${
+                      isActive
+                        ? 'bg-primary/20 text-primary dark:bg-primary dark:text-primary-foreground'
+                        : 'text-muted-foreground'
+                    }`}
+                  >
+                    <Link
+                      href={menu.href}
+                      className="flex gap-2 items-center"
+                      onClick={() => setActiveHash(menu.href)}
+                    >
+                      <menu.icon className="w-4 h-4" />
+                      {isActive && (
+                        <span className="text-sm font-medium">{menu.name}</span>
+                      )}
+                    </Link>
+                  </NavigationMenuItem>
+                );
+              })}
+              <ModeToggle />
+            </NavigationMenuList>
+          </div>
+        </NavigationMenu>
+      </div>
+    </>
+  );
+};
+
+export default Navbar;
