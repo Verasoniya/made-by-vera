@@ -10,9 +10,10 @@ import {
 import ModeToggle from '../mode-toggle';
 import { menus } from '@/assets/datas/menu';
 import VeraLogo from '@/assets/images/vera-logo.png';
+import { useActiveHashStore } from '@/store/use-active-hash-store';
 
 const Navbar = () => {
-  const [activeHash, setActiveHash] = useState('');
+  const { activeHash, setActiveHash } = useActiveHashStore();
 
   useEffect(() => {
     const handleHashChange = () => {
