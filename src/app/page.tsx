@@ -67,7 +67,7 @@ export default function Home() {
             >
               <h3 className="text-5xl">Hi</h3>
               <h3 className="text-7xl font-montserrat font-semibold">
-                It's{' '}
+                I`&lsquo;`ts{' '}
                 <span className="text-secondary font-montserrat">
                   Vera Soniya
                 </span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
+import { Card, CardContent } from '../ui/card';
 import Image from 'next/image';
 import DefaultImage from '@/assets/images/default-image.png';
 import Badge from '../badge';
