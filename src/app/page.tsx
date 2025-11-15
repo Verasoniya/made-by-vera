@@ -6,7 +6,8 @@ import Molufei from '@/assets/svg/molufei.svg';
 import Paper1 from '@/assets/svg/paper-1.svg';
 import Paper2 from '@/assets/svg/paper-2.svg';
 import Watch from '@/assets/svg/watch.svg';
-import HalfCircleBorder from '@/assets/svg/half-circle-border.svg';
+import Paper3 from '@/assets/svg/paper-3.svg';
+import Paper4 from '@/assets/svg/paper-4.svg';
 import ExperienceList from '@/components/experience-list';
 import { experiences } from '@/assets/datas/experiences';
 import {
@@ -18,6 +19,14 @@ import {
 import AnimateSection from '@/components/animate-section';
 import ModalOnDev from '@/components/modal-on-dev';
 import { useEffect, useState } from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
+import { projects } from '@/assets/datas/projects';
+import Autoplay from 'embla-carousel-autoplay';
+import ProjectCard from '@/components/project-card';
 
 export default function Home() {
   const images = [Paper1, Paper2];
@@ -137,6 +146,50 @@ export default function Home() {
               </Accordion>
             </div>
           </div>
+        </div>
+      </AnimateSection>
+      <AnimateSection id="projects">
+        <div className="relative w-full">
+          <Image
+            src={Paper3}
+            alt="paper"
+            className="absolute h-screen w-auto right-0"
+          />
+          <div className="absolute left-0 h-screen top-0 pb-16 pt-32 px-32 w-full flex flex-col justify-center items-start">
+            <h1 className="text-left font-montserrat text-5xl font-semibold pb-2 border-b-2 border-tertiary w-fit self-start">
+              Projects
+            </h1>
+            <div className="w-[80vw] h-full flex items-center justify-center self-start">
+              <Carousel
+                opts={{
+                  align: 'start',
+                  loop: true,
+                }}
+                plugins={[
+                  Autoplay({
+                    delay: 3000,
+                  }),
+                ]}
+                className="w-[80vw] space-x-3"
+              >
+                <CarouselContent className="h-screen flex justify-center items-center">
+                  {projects.map((item, index) => (
+                    <CarouselItem
+                      key={index}
+                      className="md:basis-1/2 lg:basis-1/3 px-6"
+                    >
+                      <ProjectCard data={item} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+            </div>
+          </div>
+          <Image
+            src={Paper4}
+            alt="paper"
+            className="h-screen w-auto absolute top-0 right-0"
+          />
         </div>
       </AnimateSection>
       <ModalOnDev

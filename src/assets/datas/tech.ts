@@ -1,7 +1,7 @@
 import NextJsIcon from '@/assets/svg/next-js.svg';
-import ReactJsIcon from '@/assets/svg/react-js.svg';
+import ReactJsIcon from '@/assets/svg/react.svg';
 import NuxtJsIcon from '@/assets/svg/nuxt-js.svg';
-import VueJsIcon from '@/assets/svg/vue-js.svg';
+import VueJsIcon from '@/assets/svg/vue.svg';
 
 export const techList = [
   {
