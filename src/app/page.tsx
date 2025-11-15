@@ -16,9 +16,16 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import AnimateSection from '@/components/animate-section';
+import ModalOnDev from '@/components/modal-on-dev';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const images = [Paper1, Paper2];
+  const [isModalOnDev, setIsModalOnDev] = useState(false);
+
+  useEffect(() => {
+    setIsModalOnDev(true);
+  }, []);
 
   return (
     <div>
@@ -132,6 +139,11 @@ export default function Home() {
           </div>
         </div>
       </AnimateSection>
+      <ModalOnDev
+        open={isModalOnDev}
+        onOpenChange={() => setIsModalOnDev(false)}
+        onNext={() => setIsModalOnDev(false)}
+      />
     </div>
   );
 }
