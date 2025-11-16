@@ -25,7 +25,7 @@ import { toast } from 'sonner';
 import { Mail } from 'lucide-react';
 const ContactElement = () => {
   const form = useForm<ContactForm>({
-    resolver: zodResolver(contactScheme) as any,
+    resolver: zodResolver(contactScheme),
     defaultValues: {
       name: '',
       email: '',
@@ -55,7 +55,7 @@ const ContactElement = () => {
         });
         form.reset();
       })
-      .catch((err) => {
+      .catch(() => {
         toast.warning('Warning!', {
           description: (
             <div className="space-y-1">
