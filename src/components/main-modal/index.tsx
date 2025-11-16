@@ -31,6 +31,7 @@ const MainModal = ({
             event.preventDefault();
           }
         }}
+        showCloseButton={closable ? true : false}
       >
         <DialogTitle className="hidden"></DialogTitle>
         {children}

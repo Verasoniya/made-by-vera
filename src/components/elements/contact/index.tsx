@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import emailjs from 'emailjs-com';
@@ -23,7 +23,9 @@ import {
 } from '@/components/ui/form';
 import { toast } from 'sonner';
 import { Mail } from 'lucide-react';
+import ModalLoading from '@/components/modal-loading';
 const ContactElement = () => {
+  const [isModalLoading, setIsModalLoading] = useState(false);
   const form = useForm<ContactForm>({
     resolver: zodResolver(contactScheme),
     defaultValues: {
@@ -42,6 +44,7 @@ const ContactElement = () => {
   };
 
   const onSubmit = (data: ContactForm) => {
+    setIsModalLoading(true);
     emailjs
       .send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
@@ -50,12 +53,14 @@ const ContactElement = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
+        setIsModalLoading(false);
         toast.success('Success!', {
           description: 'Your message has been sent successfully.',
         });
         form.reset();
       })
       .catch(() => {
+        setIsModalLoading(false);
         toast.warning('Warning!', {
           description: (
             <div className="space-y-1">
@@ -215,6 +220,11 @@ const ContactElement = () => {
           </motion.div>
         </div>
       </div>
+      <ModalLoading
+        open={isModalLoading}
+        onOpenChange={() => setIsModalLoading(false)}
+        label="Loading..."
+      />
     </div>
   );
 };
