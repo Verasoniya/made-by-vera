@@ -92,7 +92,7 @@ const ContactElement = () => {
             className="w-1/2 px-32 py-16 space-y-8 self-start"
           >
             <h1 className="text-center font-montserrat text-5xl font-semibold">
-              Let’s work together! hahah
+              Let’s work together!
             </h1>
 
             <div className="space-y-5">
