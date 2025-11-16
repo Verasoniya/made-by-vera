@@ -9,7 +9,7 @@ import {
 } from '../ui/navigation-menu';
 import ModeToggle from '../mode-toggle';
 import { menus } from '@/assets/datas/menu';
-import VeraLogo from '@/assets/images/vera-logo.png';
+import MolufeiLogo from '@/assets/images/molufei-logo.svg';
 import { useActiveHashStore } from '@/store/use-active-hash-store';
 
 const Navbar = () => {
@@ -59,8 +59,12 @@ const Navbar = () => {
     <>
       <div className="hidden md:block fixed top-0 z-50 shadow-border w-full">
         <div className="flex items-center justify-between gap-2 px-20 py-3">
-          <Link href={'/'}>
-            <Image src={VeraLogo} alt="vera-logo" className="w-8" />
+          <Link href={'/'} className="flex gap-2 items-center">
+            <Image
+              src={MolufeiLogo}
+              alt="vera-logo"
+              className="w-16 rotate-45"
+            />
           </Link>
           <NavigationMenu>
             <NavigationMenuList className="flex gap-4 items-center">
