@@ -175,33 +175,45 @@ export default function Home() {
             className="absolute h-screen w-auto right-0"
           />
           <div className="absolute left-0 h-screen top-0 pb-16 pt-32 px-32 w-full flex flex-col justify-center items-start">
-            <h1 className="text-left font-montserrat text-5xl font-semibold pb-2 border-b-2 border-tertiary w-fit self-start">
-              Projects
-            </h1>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-left font-montserrat text-5xl font-semibold pb-2 border-b-2 border-tertiary w-fit self-start">
+                Projects
+              </h1>
+            </motion.div>
             <div className="w-[80vw] h-full flex items-center justify-center self-start">
-              <Carousel
-                opts={{
-                  align: 'start',
-                  loop: true,
-                }}
-                plugins={[
-                  Autoplay({
-                    delay: 3000,
-                  }),
-                ]}
-                className="w-[80vw] space-x-3"
+              <motion.div
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <CarouselContent className="h-screen flex justify-center items-center">
-                  {projects.map((item, index) => (
-                    <CarouselItem
-                      key={index}
-                      className="md:basis-1/2 lg:basis-1/3 px-6"
-                    >
-                      <ProjectCard data={item} />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
+                <Carousel
+                  opts={{
+                    align: 'start',
+                    loop: true,
+                  }}
+                  plugins={[
+                    Autoplay({
+                      delay: 3000,
+                    }),
+                  ]}
+                  className="w-[80vw] space-x-3"
+                >
+                  <CarouselContent className="h-screen flex justify-center items-center">
+                    {projects.map((item, index) => (
+                      <CarouselItem
+                        key={index}
+                        className="md:basis-1/2 lg:basis-1/3 px-6"
+                      >
+                        <ProjectCard data={item} />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+              </motion.div>
             </div>
           </div>
           <Image
