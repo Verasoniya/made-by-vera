@@ -3,11 +3,13 @@ import { techList } from '@/assets/datas/tech';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Molufei from '@/assets/svg/molufei.svg';
+import WhiteMolufei from '@/assets/svg/white-molufei.svg';
+import Watch from '@/assets/svg/watch.svg';
 import Paper1 from '@/assets/svg/paper-1.svg';
 import Paper2 from '@/assets/svg/paper-2.svg';
-import Watch from '@/assets/svg/watch.svg';
 import Paper3 from '@/assets/svg/paper-3.svg';
 import Paper4 from '@/assets/svg/paper-4.svg';
+import Paper5 from '@/assets/svg/paper-5.svg';
 import ExperienceList from '@/components/experience-list';
 import { experiences } from '@/assets/datas/experiences';
 import {
@@ -27,6 +29,13 @@ import {
 import { projects } from '@/assets/datas/projects';
 import Autoplay from 'embla-carousel-autoplay';
 import ProjectCard from '@/components/project-card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import MainTooltip from '@/components/main-tooltip';
+import { Linkedin } from 'lucide-react';
+import { contact } from '@/assets/datas/contact';
 
 export default function Home() {
   const images = [Paper1, Paper2];
@@ -59,37 +68,46 @@ export default function Home() {
             </motion.div>
           ))}
           <div className="w-full absolute top-0 flex justify-end items-center h-full px-32">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.6 }}
-              className="space-y-4"
-            >
-              <h3 className="text-5xl">Hi</h3>
-              <h3 className="text-7xl font-montserrat font-semibold">
-                I&lsquo;ts{' '}
-                <span className="text-secondary font-montserrat">
-                  Vera Soniya
-                </span>
-              </h3>
+            <div className="space-y-4">
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.6 }}
+                className="space-y-4"
+              >
+                <h3 className="text-5xl">Hi</h3>
+                <h3 className="text-7xl font-montserrat font-semibold">
+                  I&lsquo;ts{' '}
+                  <span className="text-secondary font-montserrat">
+                    Vera Soniya
+                  </span>
+                </h3>
+              </motion.div>
+
               <div className="flex gap-6 justify-end">
                 {techList.map((item, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="flex flex-col items-center justify-center gap-1"
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 1.6,
+                    }}
                   >
-                    <Image
-                      src={item.icon}
-                      alt="next-js"
-                      className="text-tertiary"
-                      width={40}
-                      height={40}
-                    />
-                    <p className="text-xs text-center">{item.label}</p>
-                  </div>
+                    <MainTooltip key={index} content={item.label}>
+                      <Image
+                        src={item.icon}
+                        alt="next-js"
+                        className="text-tertiary hover:scale-[1.04]"
+                        width={40}
+                        height={40}
+                      />
+                    </MainTooltip>
+                  </motion.div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </AnimateSection>
@@ -148,8 +166,9 @@ export default function Home() {
           </div>
         </div>
       </AnimateSection>
+
       <AnimateSection id="projects">
-        <div className="relative w-full">
+        <div className="relative w-full h-screen">
           <Image
             src={Paper3}
             alt="paper"
@@ -192,6 +211,101 @@ export default function Home() {
           />
         </div>
       </AnimateSection>
+      <div id="contact" className="relative h-screen">
+        <AnimateSection id="contact">
+          <div className="relative w-full flex justify-end">
+            <Image src={Paper5} alt="paper" className="h-screen w-auto" />
+            <div className="absolute top-0 w-full h-full flex items-center justify-center">
+              <div className="w-1/2 px-32 py-16 space-y-8 self-start">
+                <h1 className="text-center font-montserrat text-5xl font-semibold">
+                  Let’s work together!
+                </h1>
+                <div className="space-y-5">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                  >
+                    <Label>Name</Label>
+                    <Input
+                      type="text"
+                      placeholder="Your name"
+                      className="mt-2"
+                      // value={name}
+                      // onChange={(e) => setName(e.target.value)}
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                  >
+                    <Label>Email</Label>
+                    <Input
+                      type="text"
+                      placeholder="Your name"
+                      className="mt-2"
+                      // value={name}
+                      // onChange={(e) => setName(e.target.value)}
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 1.2 }}
+                  >
+                    <Label>Message</Label>
+                    <Textarea
+                      placeholder="Your message"
+                      className="mt-2"
+                      // value={name}
+                      // onChange={(e) => setName(e.target.value)}
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 1.6 }}
+                  >
+                    <Button className="w-full mt-20">Send</Button>
+                  </motion.div>
+                </div>
+              </div>
+              <div className="w-1/2 h-full bg-quarternary/60 pl-10 pr-32 py-16 flex flex-col items-center gap-12">
+                <div className="flex items-center self-start gap-4">
+                  {contact.map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: 16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.8, delay: 0.6 * index }}
+                    >
+                      <MainTooltip content={item.name}>
+                        <Button
+                          className="rounded-full w-11 h-11 cursor-pointer"
+                          onClick={() => window.open(item.href, '_blank')}
+                        >
+                          <item.icon className="w-6 h-6" />
+                        </Button>
+                      </MainTooltip>
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1.6, delay: 0.6 }}
+                >
+                  <Image src={WhiteMolufei} alt="paper" className="w-auto" />
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </AnimateSection>
+      </div>
+      <div className="bg-purple-black h-20 w-full flex items-center justify-center">
+        <h6 className="text-white">&copy; 2025 Vera Soniya</h6>
+      </div>
       <ModalOnDev
         open={isModalOnDev}
         onOpenChange={() => setIsModalOnDev(false)}
