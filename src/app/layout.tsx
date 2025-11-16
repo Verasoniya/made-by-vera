@@ -3,6 +3,7 @@ import { Lato, Montserrat, Poppins } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import Navbar from '@/components/navbar';
+import { Toaster } from '@/components/ui/sonner';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -48,6 +49,16 @@ export default function RootLayout({
           <Navbar />
           {children}
         </ThemeProvider>
+        <Toaster
+          richColors
+          theme="light"
+          position="top-right"
+          toastOptions={{
+            classNames: {
+              title: '!font-bold',
+            },
+          }}
+        />
       </body>
     </html>
   );

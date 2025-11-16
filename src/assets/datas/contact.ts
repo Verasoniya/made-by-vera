@@ -1,4 +1,4 @@
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 export const contact = [
   {
     name: 'GitHub',
@@ -9,5 +9,10 @@ export const contact = [
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/vera-soniya-septi/',
     icon: Linkedin,
+  },
+  {
+    name: 'Gmail',
+    href: 'https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRnZVnHqCMhRTbCMkGGBkrtGzZqHKkPDzVdPDqzKhtZSWNRBgwkSXQTKTqbmPJvlPvzlGgv',
+    icon: Mail,
   },
 ];
