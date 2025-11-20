@@ -4,10 +4,15 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Molufei from '@/assets/svg/molufei.svg';
 import Watch from '@/assets/svg/watch.svg';
+import WatchDark from '@/assets/svg/watch-dark.svg';
 import Paper1 from '@/assets/svg/paper-1.svg';
 import Paper2 from '@/assets/svg/paper-2.svg';
 import Paper3 from '@/assets/svg/paper-3.svg';
 import Paper4 from '@/assets/svg/paper-4.svg';
+import Paper2Dark from '@/assets/svg/paper-2-dark.svg';
+import Paper3Dark from '@/assets/svg/paper-3-dark.svg';
+import Paper4Dark from '@/assets/svg/paper-4-dark.svg';
+import MolufeiDark from '@/assets/svg/molufei-dark.svg';
 import ExperienceList from '@/components/experience-list';
 import { experiences } from '@/assets/datas/experiences';
 import {
@@ -29,14 +34,32 @@ import Autoplay from 'embla-carousel-autoplay';
 import ProjectCard from '@/components/project-card';
 import MainTooltip from '@/components/main-tooltip';
 import ContactElement from '@/components/elements/contact';
+import { useTheme } from 'next-themes';
 
 export default function Home() {
-  const images = [Paper1, Paper2];
+  const { resolvedTheme } = useTheme();
+  const images =
+    resolvedTheme === 'light' ? [Paper1, Paper2] : [Paper1, Paper2Dark];
+  const molufeiImage = resolvedTheme === 'light' ? Molufei : MolufeiDark;
+  const watchImage = resolvedTheme === 'light' ? Watch : WatchDark;
+  const paper3Image = resolvedTheme === 'light' ? Paper3 : Paper3Dark;
+  const paper4Image = resolvedTheme === 'light' ? Paper4 : Paper4Dark;
+  const [mounted, setMounted] = useState(false);
   const [isModalOnDev, setIsModalOnDev] = useState(false);
 
   useEffect(() => {
-    setIsModalOnDev(true);
+    setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      setIsModalOnDev(true);
+    }
+  }, [mounted]);
+
+  if (!mounted) {
+    return <div className="opacity-0 pointer-events-none"></div>;
+  }
 
   return (
     <div>
@@ -47,7 +70,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Image src={Molufei} alt="molufei" className="w-full" />
+            <Image src={molufeiImage} alt="molufei" className="w-full" />
           </motion.div>
           {images.map((paper, index) => (
             <motion.div
@@ -91,7 +114,7 @@ export default function Home() {
                     <MainTooltip key={index} content={item.label}>
                       <Image
                         src={item.icon}
-                        alt="next-js"
+                        alt={item.label}
                         className="text-tertiary hover:scale-[1.04]"
                         width={40}
                         height={40}
@@ -118,7 +141,7 @@ export default function Home() {
               className="relative w-2/5 aspect-square"
             >
               <Image
-                src={Watch}
+                src={watchImage}
                 alt="watch"
                 className="w-full h-full p-10 object-contain inset-0"
               />
@@ -137,7 +160,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: index * 0.5 }}
                     viewport={{ once: true }}
-                    className="border-b border-tertiary/70 px-4"
+                    className="border-b border-tertiary/50 dark:border-tertiary/10 px-4"
                   >
                     <AccordionItem value={`${item.id}`}>
                       <AccordionTrigger className="w-full cursor-pointer pb-2 hover:no-underline hover:scale-[1.02]">
@@ -163,7 +186,7 @@ export default function Home() {
       <AnimateSection id="projects">
         <div className="relative w-full h-screen">
           <Image
-            src={Paper3}
+            src={paper3Image}
             alt="paper"
             className="absolute h-screen w-auto right-0"
           />
@@ -210,7 +233,7 @@ export default function Home() {
             </div>
           </div>
           <Image
-            src={Paper4}
+            src={paper4Image}
             alt="paper"
             className="h-screen w-auto absolute top-0 right-0"
           />
@@ -218,7 +241,7 @@ export default function Home() {
       </AnimateSection>
 
       <AnimateSection id="contact">
-        <ContactElement />
+        <ContactElement theme={resolvedTheme as string} />
       </AnimateSection>
 
       <div className="bg-purple-black h-20 w-full flex items-center justify-center">

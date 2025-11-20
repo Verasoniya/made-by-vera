@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { contact } from '@/assets/datas/contact';
 import Paper5 from '@/assets/svg/paper-5.svg';
+import Paper5Dark from '@/assets/svg/paper-5-dark.svg';
 import WhiteMolufei from '@/assets/svg/white-molufei.svg';
 import MainTooltip from '@/components/main-tooltip';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,7 +25,10 @@ import {
 import { toast } from 'sonner';
 import { Mail } from 'lucide-react';
 import ModalLoading from '@/components/modal-loading';
-const ContactElement = () => {
+type ContactElementProps = {
+  theme: string;
+};
+const ContactElement = ({ theme }: ContactElementProps) => {
   const [isModalLoading, setIsModalLoading] = useState(false);
   const form = useForm<ContactForm>({
     resolver: zodResolver(contactScheme),
@@ -36,6 +40,7 @@ const ContactElement = () => {
   });
 
   const isDisabled = !form.formState.isValid;
+  const paper5Image = theme === 'light' ? Paper5 : Paper5Dark;
 
   const handleToMail = () => {
     window.open(
@@ -84,7 +89,7 @@ const ContactElement = () => {
 
   return (
     <div className="relative w-full flex justify-end h-screen">
-      <Image src={Paper5} alt="paper" className="h-screen w-auto" />
+      <Image src={paper5Image} alt="paper" className="h-screen w-auto" />
       <div className="absolute top-0 w-full h-full flex items-center justify-center">
         <Form {...form}>
           <form
