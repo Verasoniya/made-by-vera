@@ -69,10 +69,10 @@ const Navbar = () => {
                 return (
                   <NavigationMenuItem
                     key={menu.name}
-                    className={`px-3 py-1 ${
+                    className={`px-3 py-1 hover:text-primary dark:hover:text-salmon-pink ${
                       isActive
-                        ? 'text-primary font-semibold dark:text-primary-foreground'
-                        : 'text-muted-foreground'
+                        ? 'text-primary font-semibold dark:text-salmon-pink'
+                        : 'text-muted-foreground dark:text-white/70'
                     }`}
                   >
                     <Link
