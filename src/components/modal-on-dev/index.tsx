@@ -14,9 +14,9 @@ const ModalOnDev = ({ open, onOpenChange, onNext }: ModalUploadFileProps) => {
       open={open}
       closable={true}
       onOpenChange={onOpenChange}
-      classModal="!w-fit p-10"
+      classModal="!w-fit p-4 md:p-6 lg:p-10"
     >
-      <div className="flex flex-col justify-center items-center gap-4 border border-secondary/60 rounded-lg border-dashed p-4">
+      <div className="flex flex-col justify-center items-center gap-4 border border-secondary/60 rounded-lg border-dashed p-4 w-[76vw] md:w-auto">
         <Construction className="w-20 h-20 text-secondary" />
         <h6 className="text-center text-sm font-medium">
           Hi! The site’s under construction… bugs included, but don’t stop

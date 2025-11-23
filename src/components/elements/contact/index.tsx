@@ -89,12 +89,16 @@ const ContactElement = ({ theme }: ContactElementProps) => {
 
   return (
     <div className="relative w-full flex justify-end h-screen">
-      <Image src={paper5Image} alt="paper" className="h-screen w-auto" />
-      <div className="absolute top-0 w-full h-full flex items-center justify-center">
+      <Image
+        src={paper5Image}
+        alt="paper"
+        className="h-screen w-auto hidden lg:block"
+      />
+      <div className="absolute top-0 w-full h-full flex flex-col lg:flex-row items-center justify-center">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-1/2 px-32 py-16 space-y-8 self-start"
+            className="w-full md:w-1/2 px-4 md:px-16 lg:px-32 py-16 space-y-8 self-start"
           >
             <h1 className="text-center font-montserrat text-5xl font-semibold">
               Let’s work together!
@@ -196,7 +200,7 @@ const ContactElement = ({ theme }: ContactElementProps) => {
             </div>
           </form>
         </Form>
-        <div className="w-1/2 h-full bg-quarternary/60 pl-10 pr-32 py-16 flex flex-col items-center gap-12">
+        <div className="w-1/2 h-full bg-quarternary/60 pl-10 pr-32 py-16 md:flex flex-col items-center gap-12 hidden">
           <div className="flex items-center self-start gap-4">
             {contact.map((item, index) => (
               <motion.div

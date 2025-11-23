@@ -12,6 +12,7 @@ type AnimationSectionProps = {
 const AnimateSection = ({ children, id, className }: AnimationSectionProps) => {
   const activeHash = useActiveHashStore((sec) => sec.activeHash);
   const { ref, shouldAnimate } = useSectionAnimation(id, activeHash);
+
   return (
     <section ref={ref} id={id} className={className}>
       <motion.div

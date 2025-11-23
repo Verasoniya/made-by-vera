@@ -1,18 +1,12 @@
 'use client';
-import { techList } from '@/assets/datas/tech';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Molufei from '@/assets/svg/molufei.svg';
 import Watch from '@/assets/svg/watch.svg';
 import WatchDark from '@/assets/svg/watch-dark.svg';
-import Paper1 from '@/assets/svg/paper-1.svg';
-import Paper2 from '@/assets/svg/paper-2.svg';
 import Paper3 from '@/assets/svg/paper-3.svg';
 import Paper4 from '@/assets/svg/paper-4.svg';
-import Paper2Dark from '@/assets/svg/paper-2-dark.svg';
 import Paper3Dark from '@/assets/svg/paper-3-dark.svg';
 import Paper4Dark from '@/assets/svg/paper-4-dark.svg';
-import MolufeiDark from '@/assets/svg/molufei-dark.svg';
 import ExperienceList from '@/components/experience-list';
 import { experiences } from '@/assets/datas/experiences';
 import {
@@ -35,12 +29,11 @@ import ProjectCard from '@/components/project-card';
 import MainTooltip from '@/components/main-tooltip';
 import ContactElement from '@/components/elements/contact';
 import { useTheme } from 'next-themes';
+import ItsMeElement from '@/components/elements/itsme';
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
-  const images =
-    resolvedTheme === 'light' ? [Paper1, Paper2] : [Paper1, Paper2Dark];
-  const molufeiImage = resolvedTheme === 'light' ? Molufei : MolufeiDark;
+
   const watchImage = resolvedTheme === 'light' ? Watch : WatchDark;
   const paper3Image = resolvedTheme === 'light' ? Paper3 : Paper3Dark;
   const paper4Image = resolvedTheme === 'light' ? Paper4 : Paper4Dark;
@@ -64,81 +57,20 @@ export default function Home() {
   return (
     <div>
       <AnimateSection id="home">
-        <div className="relative w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Image src={molufeiImage} alt="molufei" className="w-full" />
-          </motion.div>
-          {images.map((paper, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 1.4, x: 1.4, scale: 1.4 }}
-              animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: index * 0.8 }}
-              className="w-full absolute top-0"
-            >
-              <Image src={paper} alt="paper" className="w-full" />
-            </motion.div>
-          ))}
-          <div className="w-full absolute top-0 flex justify-end items-center h-full px-32">
-            <div className="space-y-4">
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.6 }}
-                className="space-y-4"
-              >
-                <h3 className="text-5xl">Hi</h3>
-                <h3 className="text-7xl font-montserrat font-semibold">
-                  I&lsquo;ts{' '}
-                  <span className="text-secondary font-montserrat">
-                    Vera Soniya
-                  </span>
-                </h3>
-              </motion.div>
-
-              <div className="flex gap-6 justify-end">
-                {techList.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: 1.6,
-                    }}
-                  >
-                    <MainTooltip key={index} content={item.label}>
-                      <Image
-                        src={item.icon}
-                        alt={item.label}
-                        className="text-tertiary hover:scale-[1.04]"
-                        width={40}
-                        height={40}
-                      />
-                    </MainTooltip>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <ItsMeElement theme={resolvedTheme as string} />
       </AnimateSection>
 
       <AnimateSection id="experience">
-        <div className="relative w-full h-screen flex flex-col space-y-6 py-14 px-32">
+        <div className="relative w-full h-screen flex flex-col space-y-2 md:space-y-6 py-14 px-4 md:px-16 lg:px-32">
           <h1 className="text-center font-montserrat text-5xl font-semibold">
             Experiences
           </h1>
-          <div className="flex items-center flex-1 gap-6">
+          <div className="flex items-center flex-1 gap-2 md:gap-4 lg:gap-6">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="relative w-2/5 aspect-square"
+              className="relative w-2/5 aspect-square hidden lg:block"
             >
               <Image
                 src={watchImage}
@@ -188,9 +120,9 @@ export default function Home() {
           <Image
             src={paper3Image}
             alt="paper"
-            className="absolute h-screen w-auto right-0"
+            className="absolute h-screen w-auto right-0 hidden md:block"
           />
-          <div className="absolute left-0 h-screen top-0 pb-16 pt-32 px-32 w-full flex flex-col justify-center items-start">
+          <div className="absolute left-0 h-screen top-0 pb-16 pt-32 px-4 md:px-16 lg:px-32 w-full flex flex-col justify-center items-start">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -200,7 +132,7 @@ export default function Home() {
                 Projects
               </h1>
             </motion.div>
-            <div className="w-[80vw] h-full flex items-center justify-center self-start">
+            <div className="w-full md:w-[80vw] h-full flex items-center justify-center self-start">
               <motion.div
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -216,13 +148,13 @@ export default function Home() {
                       delay: 3000,
                     }),
                   ]}
-                  className="w-[80vw] space-x-3"
+                  className="w-[90vw] md:w-[80vw] space-x-3"
                 >
                   <CarouselContent className="h-screen flex justify-center items-center">
                     {projects.map((item, index) => (
                       <CarouselItem
                         key={index}
-                        className="md:basis-1/2 lg:basis-1/3 px-6"
+                        className="basis-full md:basis-1/2 lg:basis-1/3 px-2 md:px-6"
                       >
                         <ProjectCard data={item} />
                       </CarouselItem>
@@ -235,18 +167,19 @@ export default function Home() {
           <Image
             src={paper4Image}
             alt="paper"
-            className="h-screen w-auto absolute top-0 right-0"
+            className="h-screen w-auto absolute top-0 right-0 hidden md:block"
           />
         </div>
       </AnimateSection>
 
-      <AnimateSection id="contact">
+      <AnimateSection id="projects">
         <ContactElement theme={resolvedTheme as string} />
       </AnimateSection>
 
       <div className="bg-purple-black h-20 w-full flex items-center justify-center">
         <h6 className="text-white">&copy; 2025 Vera Soniya</h6>
       </div>
+
       <ModalOnDev
         open={isModalOnDev}
         onOpenChange={() => setIsModalOnDev(false)}

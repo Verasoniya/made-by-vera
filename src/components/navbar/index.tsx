@@ -99,7 +99,7 @@ const Navbar = () => {
           </NavigationMenu>
         </div>
       </div>
-      <div className="absolute md:hidden bottom-4 left-2 right-2 z-50 rounded-xl shadow dark:shadow-lg shadow-border bg-background dark:bg-neutral-900">
+      <div className="fixed md:hidden bottom-4 left-2 right-2 z-50 rounded-xl shadow dark:shadow-lg shadow-border bg-background dark:bg-neutral-900">
         <NavigationMenu className="py-2 px-2">
           <div className="!w-[100vw]">
             <NavigationMenuList className="flex justify-around items-center">
