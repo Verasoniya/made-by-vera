@@ -12,7 +12,7 @@ import { experiences } from '@/assets/datas/experiences';
 import ExperienceList from '@/components/experience-list';
 import Watch from '@/assets/svg/watch.svg';
 import WatchDark from '@/assets/svg/watch-dark.svg';
-import WatchMbDark from '@/assets/svg/watch-mb-dark.svg';
+import HalfWatch from '@/assets/svg/half-watch.svg';
 import useDevice from '@/hooks/use-device';
 
 type ContactElementProps = {
@@ -42,23 +42,23 @@ const ExperienceElement = ({ theme }: ContactElementProps) => {
             className="w-full h-full p-10 object-contain inset-0"
           />
         </motion.div>
-        <div className="flex-1 relative">
+        <div className="flex-1 relative h-full">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="absolute right-0 w-2/3 block lg:hidden -top-5"
+            className="absolute right-0 w-2/3 block lg:hidden top-20"
           >
             <Image
-              src={WatchMbDark}
+              src={HalfWatch}
               alt="watch"
-              className="w-full h-full object-cover inset-0"
+              className="w-full h-full object-cover inset-0 opacity-25"
             />
           </motion.div>
           <Accordion
             type="single"
             collapsible
-            className="w-full flex flex-col justify-start gap-4 h-full pl-4 md:pl-0 pr-4 md:pr-16 lg:pr-32"
+            className="w-full flex flex-col justify-start gap-4 h-full pl-4 md:pl-0 pr-4 md:pr-16 lg:pr-32 absolute top-0"
             defaultValue="0"
           >
             {experiences.map((item, index) => (
