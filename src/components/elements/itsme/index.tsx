@@ -7,9 +7,11 @@ import Paper1Mb from '@/assets/svg/paper-1-mb.svg';
 import Paper2 from '@/assets/svg/paper-2.svg';
 import Paper2Dark from '@/assets/svg/paper-2-dark.svg';
 import Paper2MbDark from '@/assets/svg/paper-2-mb-dark.svg';
+import Paper2MbLight from '@/assets/svg/paper-2-mb-light.svg';
 import Molufei from '@/assets/svg/molufei.svg';
 import MolufeiDark from '@/assets/svg/molufei-dark.svg';
 import MolufeiMbDark from '@/assets/svg/molufei-mb-dark.svg';
+import MolufeiMbLight from '@/assets/svg/molufei-mb-light.svg';
 import Image from 'next/image';
 import MainTooltip from '@/components/main-tooltip';
 import useDevice from '@/hooks/use-device';
@@ -21,12 +23,20 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
   const { isMobile } = useDevice();
   const images =
     theme === 'light'
-      ? [Paper1, Paper2]
+      ? isMobile
+        ? [Paper1Mb, Paper2MbLight]
+        : [Paper1, Paper2]
       : isMobile
       ? [Paper1Mb, Paper2MbDark]
       : [Paper1, Paper2Dark];
   const molufeiImage =
-    theme === 'light' ? Molufei : isMobile ? MolufeiMbDark : MolufeiDark;
+    theme === 'light'
+      ? isMobile
+        ? MolufeiMbLight
+        : Molufei
+      : isMobile
+      ? MolufeiMbDark
+      : MolufeiDark;
   return (
     <div className="relative w-full">
       <motion.div
