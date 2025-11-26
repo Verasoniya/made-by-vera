@@ -97,7 +97,7 @@ const ContactElement = ({ theme }: ContactElementProps) => {
       />
       <div className="absolute top-0 w-full h-full flex flex-col lg:flex-row items-center justify-center">
         <Form {...form}>
-          <div className="relative w-full h-full">
+          <div className="relative w-full lg:w-1/2 h-full">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

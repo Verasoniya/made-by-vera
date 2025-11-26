@@ -23,7 +23,7 @@ const ProjectCard = ({ data }: { data: ProjectCardProps }) => {
           alt="project-image"
           className={`rounded-t-xl ${data.image ? 'object-cover' : 'w-32'}`}
         />
-        <div className="absolute top-0 left-2">
+        <div className="absolute top-2 left-2">
           <Badge label={data.type || ''} />
         </div>
       </div>
