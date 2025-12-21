@@ -45,7 +45,7 @@ const ModalViewProject = ({
               }`}
             />
             <div className="absolute bottom-1 right-1 bg-white/80 rounded-lg flex items-center justify-center px-2 py-1 gap-2">
-              {data.tech.map((item: any, id: number) => {
+              {data.tech?.map((item: any, id: number) => {
                 return (
                   <Image
                     key={id}
