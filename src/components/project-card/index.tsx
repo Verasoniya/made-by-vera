@@ -5,17 +5,21 @@ import DefaultImage from '@/assets/images/default-image.png';
 import Badge from '../badge';
 import { ProjectCardProps } from '../../../types';
 
-const ProjectCard = ({ data }: { data: ProjectCardProps }) => {
+const ProjectCard = ({
+  data,
+  onClick,
+}: {
+  data: ProjectCardProps;
+  onClick: () => void;
+}) => {
   return (
     <Card
       className="pt-0 cursor-pointer hover:scale-[1.1] transition-all duration-300 h-[24rem]"
-      onClick={() => {
-        alert('clicked');
-      }}
+      onClick={onClick}
     >
       <div
-        className={`w-full h-52 rounded-t-xl flex items-center justify-center relative ${
-          data.image ? '' : 'bg-[#F5F5F5]'
+        className={`w-full h-[40rem] rounded-t-xl flex items-center justify-center relative ${
+          data.image ? '' : 'bg-[#F5F5F5] p-2'
         }`}
       >
         <Image

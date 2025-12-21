@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -15,6 +15,7 @@ import Paper3 from '@/assets/svg/paper-3.svg';
 import Paper4 from '@/assets/svg/paper-4.svg';
 import Paper3Dark from '@/assets/svg/paper-3-dark.svg';
 import Paper4Dark from '@/assets/svg/paper-4-dark.svg';
+import ModalViewProject from '@/components/modal-view-project';
 
 type ContactElementProps = {
   theme: string;
@@ -23,6 +24,13 @@ type ContactElementProps = {
 const ProjectElement = ({ theme }: ContactElementProps) => {
   const paper3Image = theme === 'light' ? Paper3 : Paper3Dark;
   const paper4Image = theme === 'light' ? Paper4 : Paper4Dark;
+  const [selectedProject, setSelectedProject] = useState([]);
+  const [isModalViewProject, setIsModalViewProject] = useState(false);
+
+  const handleViewProject = (project: any) => {
+    setSelectedProject(project);
+    setIsModalViewProject(true);
+  };
   return (
     <div className="relative w-full h-screen">
       <Image
@@ -65,7 +73,10 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
                     key={index}
                     className="basis-[94%] md:basis-1/2 lg:basis-1/3 px-2 md:px-6"
                   >
-                    <ProjectCard data={item} />
+                    <ProjectCard
+                      data={item}
+                      onClick={() => handleViewProject(item)}
+                    />
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -77,6 +88,13 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
         src={paper4Image}
         alt="paper"
         className="h-screen w-auto absolute top-0 right-0 hidden md:block"
+      />
+      <ModalViewProject
+        open={isModalViewProject}
+        onOpenChange={() => {
+          setIsModalViewProject(false);
+        }}
+        data={selectedProject}
       />
     </div>
   );

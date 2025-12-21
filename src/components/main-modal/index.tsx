@@ -24,7 +24,7 @@ const MainModal = ({
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent
-        className={classModal}
+        className={`${classModal} !min-w-fit`}
         onInteractOutside={(event) => {
           const target = event.target as HTMLElement;
           if (target?.closest('[data-sonner-toaster')) {
