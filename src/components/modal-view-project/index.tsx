@@ -18,7 +18,7 @@ const ModalViewProject = ({
   data,
 }: ModalViewProjectProps) => {
   return (
-    <MainModal open={open} onOpenChange={onOpenChange} classModal="!w-fit">
+    <MainModal open={open} onOpenChange={onOpenChange} classModal="!w-fit ">
       <div className="space-y-4 md:space-y-6 max-h-[80vh] w-[80vw] md:w-[40vw] max-w-[80vw] overflow-y-scroll font-family-poppins">
         <div>
           <div className="flex gap-2 items-center">
@@ -27,7 +27,7 @@ const ModalViewProject = ({
             </h6>
             <Badge label="Work Project" />
           </div>
-          <h6 className="text-xs text-primary font-medium">
+          <h6 className="text-xs text-secondary font-medium">
             {data.time} | {data.role}
           </h6>
         </div>
@@ -58,7 +58,9 @@ const ModalViewProject = ({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <h6 className="text-neutral-500 text-xs ">{data.summarize}</h6>
+            <h6 className="text-neutral-500 dark:text-neutral-50 text-xs">
+              {data.summarize}
+            </h6>
             {data.url && (
               <Button
                 variant={'secondary'}
@@ -73,7 +75,10 @@ const ModalViewProject = ({
             <h6 className="text-base font-bold  text-tertiary">What I do:</h6>
             <ul className="list-disc pl-5">
               {data.jobdesc?.map((job: any, id: number) => (
-                <li key={id} className="text-sm  text-neutral-600 linet">
+                <li
+                  key={id}
+                  className="text-sm  text-neutral-600 dark:text-neutral-50 linet"
+                >
                   {job.label}
                 </li>
               ))}
