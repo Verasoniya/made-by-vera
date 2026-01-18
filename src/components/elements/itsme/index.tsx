@@ -7,21 +7,21 @@ import Paper1Mb from '@/assets/svg/paper-1-mb.svg';
 import Paper2 from '@/assets/svg/paper-2.svg';
 import Paper2Dark from '@/assets/svg/paper-2-dark.svg';
 import Paper2MbDark from '@/assets/svg/paper-2-mb-dark.svg';
-import Paper2MbLight from '@/assets/svg/paper-2-mb-light.svg';
 import Molufei from '@/assets/svg/molufei.svg';
 import MolufeiDark from '@/assets/svg/molufei-dark.svg';
-import MolufeiMbDark from '@/assets/svg/molufei-mb-dark.svg';
-import MolufeiMbLight from '@/assets/svg/molufei-mb-light.svg';
 import PinkMolufei from '@/assets/svg/pink-molufei.svg';
 import Image from 'next/image';
 import MainTooltip from '@/components/main-tooltip';
 import useDevice from '@/hooks/use-device';
+import Paper5 from '@/assets/svg/paper-5.svg';
+import Paper5Dark from '@/assets/svg/paper-5-dark.svg';
 
 type ContactElementProps = {
   theme: string;
 };
 const ItsMeElement = ({ theme }: ContactElementProps) => {
   const { isMobile, isTablet } = useDevice();
+  const paper5Image = theme === 'light' ? Paper5 : Paper5Dark;
   const images =
     theme === 'light'
       ? [Paper1, Paper2]
@@ -69,10 +69,29 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
             </motion.div>
           ))}
       <div
+        style={{
+          backgroundImage:
+            isMobile || isTablet ? `url(${paper5Image.src})` : 'none',
+          opacity: isMobile || isTablet ? 0.8 : 0,
+        }}
         className={`w-full bottom-0 md:top-0 flex flex-col md:flex-row justify-center xl:justify-end items-center h-full px-5 md:px-16 xl:px-32 ${
           isMobile || isTablet ? 'relative py-20' : 'absolute'
         }`}
       >
+        {/* {isMobile || isTablet ? (
+          <motion.div
+            initial={{ opacity: 0, y: 1.4, x: 1.4, scale: 1.4 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="w-full top-0 z-10"
+          >
+            <Image
+              src={paper5Image}
+              alt="paper"
+              className={`w-full object-cover h-[60vh]`}
+            />
+          </motion.div>
+        ) : null} */}
         {isMobile || isTablet ? (
           <motion.div
             initial={{ opacity: 0, y: 0 }}
