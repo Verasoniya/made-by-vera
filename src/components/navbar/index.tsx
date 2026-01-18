@@ -75,6 +75,7 @@ const Navbar = () => {
             if (entry.isIntersecting) {
               const id = `#${entry.target.id}`;
               setActiveHash(id);
+              history.replaceState(null, '', id);
             }
           });
         },

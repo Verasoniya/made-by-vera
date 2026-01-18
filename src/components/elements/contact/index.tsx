@@ -222,6 +222,28 @@ const ContactElement = ({ theme }: ContactElementProps) => {
                     </Button>
                   </motion.div>
                 </div>
+                {isMobile || isTablet ? (
+                  <div className="flex items-center self-start gap-4">
+                    {contact.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: 16 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6 * index }}
+                      >
+                        <MainTooltip content={item.name}>
+                          <Button
+                            type="button"
+                            className="rounded-full w-11 h-11 cursor-pointer"
+                            onClick={() => window.open(item.href, '_blank')}
+                          >
+                            <item.icon className="w-6 h-6" />
+                          </Button>
+                        </MainTooltip>
+                      </motion.div>
+                    ))}
+                  </div>
+                ) : null}
               </form>
             </div>
           </Form>
