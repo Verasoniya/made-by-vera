@@ -12,6 +12,7 @@ import Molufei from '@/assets/svg/molufei.svg';
 import MolufeiDark from '@/assets/svg/molufei-dark.svg';
 import MolufeiMbDark from '@/assets/svg/molufei-mb-dark.svg';
 import MolufeiMbLight from '@/assets/svg/molufei-mb-light.svg';
+import PinkMolufei from '@/assets/svg/pink-molufei.svg';
 import Image from 'next/image';
 import MainTooltip from '@/components/main-tooltip';
 import useDevice from '@/hooks/use-device';
@@ -20,63 +21,85 @@ type ContactElementProps = {
   theme: string;
 };
 const ItsMeElement = ({ theme }: ContactElementProps) => {
-  const { isMobile } = useDevice();
+  const { isMobile, isTablet } = useDevice();
   const images =
     theme === 'light'
-      ? isMobile
-        ? [Paper1Mb, Paper2MbLight]
-        : [Paper1, Paper2]
-      : isMobile
+      ? [Paper1, Paper2]
+      : isMobile || isTablet
       ? [Paper1Mb, Paper2MbDark]
       : [Paper1, Paper2Dark];
   const molufeiImage =
     theme === 'light'
-      ? isMobile
-        ? MolufeiMbLight
+      ? isMobile || isTablet
+        ? PinkMolufei
         : Molufei
-      : isMobile
-      ? MolufeiMbDark
+      : isMobile || isTablet
+      ? PinkMolufei
       : MolufeiDark;
   return (
     <div className="relative w-full">
-      <motion.div
-        initial={{ opacity: 0, y: 0 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Image
-          src={molufeiImage}
-          alt="molufei"
-          className="w-full h-screen object-cover object-center"
-        />
-      </motion.div>
-      {images.map((paper, index) => (
+      {isMobile || isTablet ? null : (
         <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 1.4, x: 1.4, scale: 1.4 }}
-          animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-          transition={{ duration: 0.8, delay: index * 0.8 }}
-          className="w-full absolute top-0"
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           <Image
-            src={paper}
-            alt="paper"
+            src={molufeiImage}
+            alt="molufei"
             className="w-full h-screen object-cover object-center"
           />
         </motion.div>
-      ))}
-      <div className="w-full absolute bottom-0 md:top-0 flex justify-center md:justify-end items-center h-full px-5 md:px-16 lg:px-32">
-        <div className="space-y-4 mt-[20vh] md:mt-0">
+      )}
+      {isMobile || isTablet
+        ? null
+        : images.map((paper, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 1.4, x: 1.4, scale: 1.4 }}
+              animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: index * 0.6 }}
+              className="w-full absolute top-0"
+            >
+              <Image
+                src={paper}
+                alt="paper"
+                className="w-full h-screen object-cover object-center"
+              />
+            </motion.div>
+          ))}
+      <div
+        className={`w-full bottom-0 md:top-0 flex flex-col md:flex-row justify-center xl:justify-end items-center h-full px-5 md:px-16 xl:px-32 ${
+          isMobile || isTablet ? 'relative py-20' : 'absolute'
+        }`}
+      >
+        {isMobile || isTablet ? (
+          <motion.div
+            initial={{ opacity: 0, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Image
+              src={molufeiImage}
+              alt="molufei"
+              className="w-full h-[20vh] lg:h-[40vh] object-cover object-center"
+            />
+          </motion.div>
+        ) : null}
+        <div className={`space-y-4`}>
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
+            transition={{
+              duration: 0.8,
+              // delay: isMobile || isTablet ? 0.1 : 1.6,
+            }}
             className="space-y-2 md:space-y-4"
           >
-            <h3 className="text-4xl lg:text-5xl text-center md:text-start">
+            <h3 className="text-4xl xl:text-5xl text-center md:text-start">
               Hi
             </h3>
-            <h3 className="text-5xl lg:text-7xl font-montserrat font-semibold">
+            <h3 className="text-5xl xl:text-7xl font-montserrat font-semibold">
               I&lsquo;ts{' '}
               <span className="text-secondary font-montserrat">
                 Vera Soniya
@@ -84,7 +107,7 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
             </h3>
           </motion.div>
 
-          <div className="flex gap-2 md:gap-4 lg:gap-6 justify-center md:justify-end">
+          <div className="flex gap-2 md:gap-4 xl:gap-6 justify-center md:justify-end">
             {techList.map((item, index) => (
               <motion.div
                 key={index}
@@ -92,14 +115,14 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
                   duration: 0.8,
-                  delay: 1.6,
+                  // delay: isMobile || isTablet ? 0.1 : 1.6,
                 }}
               >
                 <MainTooltip key={index} content={item.label}>
                   <Image
                     src={item.icon}
                     alt={item.label}
-                    className="hover:scale-[1.04] w-10 lg:w-20 h-10 lg:h-20 "
+                    className="hover:scale-[1.04] w-10 xl:w-20 h-10 xl:h-20 "
                   />
                 </MainTooltip>
               </motion.div>

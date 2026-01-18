@@ -9,9 +9,9 @@ export default function useDevice() {
   const updateDevice = () => {
     const width = window.innerWidth;
 
-    if (width < 1024) {
+    if (width < 768) {
       setDevice('mobile');
-    } else if (width < 1024) {
+    } else if (width < 1280) {
       setDevice('tablet');
     } else {
       setDevice('desktop');

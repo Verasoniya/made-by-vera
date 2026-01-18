@@ -20,21 +20,25 @@ type ContactElementProps = {
 };
 
 const ExperienceElement = ({ theme }: ContactElementProps) => {
-  const { isMobile } = useDevice();
+  const { isMobile, isTablet } = useDevice();
 
   const watchImage = theme === 'light' ? Watch : WatchDark;
 
   return (
-    <div className="relative w-full h-screen flex flex-col space-y-2 md:space-y-6 py-14">
-      <h1 className="text-center font-montserrat text-5xl font-semibold px-4 md:px-16 lg:px-32">
+    <div
+      className={`relative w-full flex flex-col space-y-2 gap-2 md:space-y-6 py-14 ${
+        isMobile || isTablet ? 'h-auto' : 'h-screen'
+      }`}
+    >
+      <h1 className="text-center font-montserrat text-5xl font-semibold px-4 md:px-16 xl:px-32">
         Experiences
       </h1>
-      <div className="flex items-center flex-1 gap-2 md:gap-4 lg:gap-6">
+      <div className="flex items-center flex-1 gap-2 md:gap-4 xl:gap-6">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="relative w-2/5 aspect-square hidden lg:block pl-4 md:pl-16 lg:pl-32"
+          className="relative w-2/5 aspect-square hidden xl:block pl-4 md:pl-16 xl:pl-32"
         >
           <Image
             src={watchImage}
@@ -42,23 +46,25 @@ const ExperienceElement = ({ theme }: ContactElementProps) => {
             className="w-full h-full p-10 object-contain inset-0"
           />
         </motion.div>
-        <div className="flex-1 relative h-full">
+        <div className="flex-1 relative h-full flex justify-center items-center">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="absolute right-0 w-2/3 block lg:hidden top-20"
+            className="absolute right-0 w-1/2 md:w-auto h-full block xl:hidden top-2/10 md:top-0"
           >
             <Image
               src={HalfWatch}
               alt="watch"
-              className="w-full h-full object-cover inset-0 opacity-25"
+              className="w-auto h-auto md:h-full object-cover inset-0 opacity-25"
             />
           </motion.div>
           <Accordion
             type="single"
             collapsible
-            className="w-full flex flex-col justify-start gap-4 h-full pl-4 md:pl-0 pr-4 md:pr-16 lg:pr-32 absolute top-0"
+            className={`w-full flex flex-col lg:justify-center xl:justify-start justify-start gap-4 relative pl-4 md:pl-16 lg:pl-32 pr-4 md:pr-16 xl:pr-32 py-20 xl:py-0 ${
+              isMobile || isTablet ? 'h-full' : 'h-fit'
+            }`}
             defaultValue="0"
           >
             {experiences.map((item, index) => (

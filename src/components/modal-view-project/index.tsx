@@ -5,6 +5,7 @@ import Image from 'next/image';
 import DefaultImage from '@/assets/images/default-image.png';
 import Badge from '../badge';
 import { Button } from '../ui/button';
+import MainTooltip from '../main-tooltip';
 
 type ModalViewProjectProps = {
   open: boolean;
@@ -19,10 +20,10 @@ const ModalViewProject = ({
 }: ModalViewProjectProps) => {
   return (
     <MainModal open={open} onOpenChange={onOpenChange} classModal="!w-fit ">
-      <div className="space-y-4 md:space-y-6 max-h-[80vh] w-[80vw] md:w-[40vw] max-w-[80vw] overflow-y-scroll font-family-poppins">
+      <div className="space-y-4 md:space-y-6 max-h-[80vh] w-[80vw] xl:w-[40vw] max-w-[80vw] overflow-y-scroll font-family-poppins">
         <div>
           <div className="flex gap-2 items-center">
-            <h6 className="font-semibold text-sm md:text-base lg:text-xl">
+            <h6 className="font-semibold text-sm md:text-base xl:text-xl">
               {data.name}
             </h6>
             <Badge label="Work Project" />
@@ -44,32 +45,36 @@ const ModalViewProject = ({
                 data.image ? 'object-cover p-0' : 'object-contain p-2'
               }`}
             />
-            <div className="absolute bottom-1 right-1 bg-white/80 rounded-lg flex items-center justify-center px-2 py-1 gap-2">
-              {data.tech?.map((item: any, id: number) => {
-                return (
-                  <Image
-                    key={id}
-                    src={item.icon}
-                    alt="tech-icon"
-                    className="w-6 h-6"
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <h6 className="text-neutral-500 dark:text-neutral-50 text-xs">
-              {data.summarize}
-            </h6>
             {data.url && (
               <Button
                 variant={'secondary'}
                 size={'sm'}
-                className="text-primary-foreground rounded-full cursor-pointer"
+                className="text-primary-foreground rounded-full cursor-pointer absolute bottom-2 right-2"
               >
                 See Project
               </Button>
             )}
+          </div>
+          <div className="flex items-center gap-4">
+            <h6 className="text-neutral-500 dark:text-neutral-50 text-xs flex-1">
+              {data.summarize}
+            </h6>
+            <div className="max-w-1/3">
+              <h6 className="text-xs font-medium">Tech Stack:</h6>
+              <div className="ml-auto rounded-md flex items-center justify-start px-3 py-2 gap-2 border-2 overflow-x-auto">
+                {data.tech?.map((item: any, id: number) => {
+                  return (
+                    <MainTooltip key={id} content={item.label}>
+                      <Image
+                        src={item.icon}
+                        alt="tech-icon"
+                        className="w-6 h-6"
+                      />
+                    </MainTooltip>
+                  );
+                })}
+              </div>
+            </div>
           </div>
           <div>
             <h6 className="text-base font-bold  text-tertiary">What I do:</h6>

@@ -16,6 +16,7 @@ import Paper4 from '@/assets/svg/paper-4.svg';
 import Paper3Dark from '@/assets/svg/paper-3-dark.svg';
 import Paper4Dark from '@/assets/svg/paper-4-dark.svg';
 import ModalViewProject from '@/components/modal-view-project';
+import useDevice from '@/hooks/use-device';
 
 type ContactElementProps = {
   theme: string;
@@ -26,19 +27,30 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
   const paper4Image = theme === 'light' ? Paper4 : Paper4Dark;
   const [selectedProject, setSelectedProject] = useState([]);
   const [isModalViewProject, setIsModalViewProject] = useState(false);
+  const { isMobile, isTablet } = useDevice();
 
   const handleViewProject = (project: any) => {
     setSelectedProject(project);
     setIsModalViewProject(true);
   };
   return (
-    <div className="relative w-full h-screen">
+    <div
+      className={`relative w-full ${
+        isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
+      }`}
+    >
       <Image
         src={paper3Image}
         alt="paper"
-        className="absolute h-screen w-auto right-0 hidden md:block"
+        className={`absolute w-auto right-0 hidden xl:block h-screen`}
       />
-      <div className="absolute left-0 h-screen top-0 pb-16 pt-32 px-4 md:px-16 lg:px-32 w-full flex flex-col justify-center items-start">
+      <div
+        className={`pb-16 pt-24 lg:pt-32 px-4 md:px-16 xl:px-32 w-full flex flex-col justify-center items-start gap-10 ${
+          isMobile || isTablet
+            ? 'h-[80vh] relative'
+            : 'h-screen absolute left-0 top-0'
+        }`}
+      >
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,7 +61,7 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
             Projects
           </h1>
         </motion.div>
-        <div className="w-full md:w-[80vw] h-full flex items-center justify-center self-start">
+        <div className="w-full xl:w-[80vw] h-full flex items-center justify-center self-start">
           <motion.div
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
@@ -57,7 +69,7 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
           >
             <Carousel
               opts={{
-                align: 'start',
+                align: 'end',
                 loop: true,
               }}
               plugins={[
@@ -65,13 +77,17 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
                   delay: 3000,
                 }),
               ]}
-              className="w-[90vw] md:w-[80vw] space-x-3"
+              className="w-[86vw] xl:w-[80vw] space-x-3"
             >
-              <CarouselContent className="h-screen flex justify-center items-center mx-2">
+              <CarouselContent
+                className={`flex justify-center items-center mx-2 ${
+                  isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
+                }`}
+              >
                 {projects.map((item, index) => (
                   <CarouselItem
                     key={index}
-                    className="basis-[94%] md:basis-1/2 lg:basis-1/3 px-2 md:px-6"
+                    className="basis-[94%] md:basis-[60vw] lg:basis-[50%] xl:basis-1/3 px-2 md:px-6 h-fit pb-2"
                   >
                     <ProjectCard
                       data={item}
@@ -87,7 +103,7 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
       <Image
         src={paper4Image}
         alt="paper"
-        className="h-screen w-auto absolute top-0 right-0 hidden md:block"
+        className="h-screen w-auto absolute top-0 right-0 hidden xl:block"
       />
       <ModalViewProject
         open={isModalViewProject}

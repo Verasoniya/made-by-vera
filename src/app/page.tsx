@@ -43,7 +43,7 @@ export default function Home() {
         <ProjectElement theme={resolvedTheme as string} />
       </AnimateSection>
 
-      <AnimateSection id="projects">
+      <AnimateSection id="contact">
         <ContactElement theme={resolvedTheme as string} />
       </AnimateSection>
 
@@ -51,11 +51,11 @@ export default function Home() {
         <h6 className="text-white">&copy; 2025 Vera Soniya</h6>
       </div>
 
-      <ModalOnDev
+      {/* <ModalOnDev
         open={isModalOnDev}
         onOpenChange={() => setIsModalOnDev(false)}
         onNext={() => setIsModalOnDev(false)}
-      />
+      /> */}
     </div>
   );
 }

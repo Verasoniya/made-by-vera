@@ -18,14 +18,16 @@ const ProjectCard = ({
       onClick={onClick}
     >
       <div
-        className={`w-full h-[40rem] rounded-t-xl flex items-center justify-center relative ${
+        className={`w-full h-2/3 rounded-t-xl flex items-center justify-center relative ${
           data.image ? '' : 'bg-[#F5F5F5] p-2'
         }`}
       >
         <Image
           src={data.image || DefaultImage}
           alt="project-image"
-          className={`rounded-t-xl ${data.image ? 'object-cover' : 'w-32'}`}
+          className={`rounded-t-xl ${
+            data.image ? 'object-cover h-full' : 'w-32 h-full'
+          }`}
         />
         <div className="absolute top-2 left-2">
           <Badge label={data.type || ''} />

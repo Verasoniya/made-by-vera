@@ -26,10 +26,12 @@ import {
 import { toast } from 'sonner';
 import { Mail } from 'lucide-react';
 import ModalLoading from '@/components/modal-loading';
+import useDevice from '@/hooks/use-device';
 type ContactElementProps = {
   theme: string;
 };
 const ContactElement = ({ theme }: ContactElementProps) => {
+  const { isMobile, isTablet } = useDevice();
   const [isModalLoading, setIsModalLoading] = useState(false);
   const form = useForm<ContactForm>({
     resolver: zodResolver(contactScheme),
@@ -89,37 +91,43 @@ const ContactElement = ({ theme }: ContactElementProps) => {
   };
 
   return (
-    <div className="relative w-full flex justify-end h-screen ">
+    <div
+      className={`relative w-full flex justify-end ${
+        isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
+      }`}
+    >
       <Image
         src={paper5Image}
         alt="paper"
-        className="h-screen w-full object-cover"
+        className={`w-full object-cover ${
+          isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
+        }`}
       />
-      <div className="absolute top-0 w-full h-full flex flex-col lg:flex-row items-center justify-center">
+      <div className="absolute top-0 w-full h-full flex flex-col xl:flex-row items-center justify-center">
         <Form {...form}>
-          <div className="relative w-full lg:w-1/2 h-full">
+          <div className="relative w-full xl:w-1/2 h-full">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.6, delay: 0.6 }}
-              className="block md:hidden"
+              className="flex w-full xl:hidden items-center justify-center absolute top-10 -z-0"
             >
               <Image
                 src={PinkMolufei}
                 alt="paper"
-                className="w-auto absolute translate-y-1/2 opacity-20 dark:opacity-10 -z-0"
+                className="h-[60vh] md:h-[40vw] opacity-20 dark:opacity-10"
               />
             </motion.div>
 
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full px-4 md:px-16 lg:px-32 py-16 space-y-8 self-start absolute h-full"
+              className="w-full px-4 md:px-16 xl:px-32 py-16 space-y-8 self-start absolute h-full"
             >
-              <h1 className="text-center font-montserrat text-5xl font-semibold">
+              <h1 className="text-center font-montserrat text-3xl md:text-5xl font-semibold">
                 Let’s work together!
               </h1>
 
-              <div className="space-y-5">
+              <div className="space-y-3 md:space-y-5">
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -129,15 +137,15 @@ const ContactElement = ({ theme }: ContactElementProps) => {
                     control={form.control}
                     name="name"
                     render={({ field }) => (
-                      <FormItem className="grid gap-1">
-                        <FormLabel>
+                      <FormItem className="grid gap-0.5 md:gap-1">
+                        <FormLabel className="text-sm md:text-base">
                           Name <span className="text-destructive">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
                             type="text"
                             placeholder="Your name"
-                            className="mt-2 bg-white/70 dark:bg-white/60 dark:text-neutral-700 dark:placeholder:text-neutral-600"
+                            className="text-sm md:text-base mt-1 md:mt-2 bg-white/70 dark:bg-white/60 dark:text-neutral-700 dark:placeholder:text-neutral-600"
                             {...field}
                           />
                         </FormControl>
@@ -155,8 +163,8 @@ const ContactElement = ({ theme }: ContactElementProps) => {
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                      <FormItem className="grid gap-1">
-                        <FormLabel>
+                      <FormItem className="grid gap-0.5 md:gap-1">
+                        <FormLabel className="text-sm md:text-base">
                           Email <span className="text-destructive">*</span>
                         </FormLabel>
 
@@ -164,7 +172,7 @@ const ContactElement = ({ theme }: ContactElementProps) => {
                           <Input
                             type="text"
                             placeholder="Your name"
-                            className="mt-2 bg-white/70 dark:bg-white/60 dark:text-neutral-700 dark:placeholder:text-neutral-600"
+                            className="text-sm md:text-base mt-1 md:mt-2 bg-white/70 dark:bg-white/60 dark:text-neutral-700 dark:placeholder:text-neutral-600"
                             {...field}
                           />
                         </FormControl>
@@ -182,15 +190,15 @@ const ContactElement = ({ theme }: ContactElementProps) => {
                     control={form.control}
                     name="message"
                     render={({ field }) => (
-                      <FormItem className="grid gap-1">
-                        <FormLabel>
+                      <FormItem className="grid gap-0.5 md:gap-1">
+                        <FormLabel className="text-sm md:text-base">
                           Message <span className="text-destructive">*</span>
                         </FormLabel>
 
                         <FormControl>
                           <Textarea
                             placeholder="Your message"
-                            className="mt-2 bg-white/70 dark:bg-white/60 dark:text-neutral-700 dark:placeholder:text-neutral-600 min-h-20 max-h-40"
+                            className="text-sm md:text-base mt-1 md:mt-2 bg-white/70 dark:bg-white/60 dark:text-neutral-700 dark:placeholder:text-neutral-600 min-h-20 max-h-40"
                             {...field}
                           />
                         </FormControl>
@@ -205,7 +213,7 @@ const ContactElement = ({ theme }: ContactElementProps) => {
                   transition={{ duration: 0.8, delay: 1.6 }}
                 >
                   <Button
-                    className="w-full mt-20 cursor-pointer"
+                    className="w-full mt-10 md:mt-20 cursor-pointer"
                     type="submit"
                     // disabled={isDisabled}
                   >
@@ -216,7 +224,7 @@ const ContactElement = ({ theme }: ContactElementProps) => {
             </form>
           </div>
         </Form>
-        <div className="w-1/2 h-full bg-quarternary/60 pl-10 pr-32 py-16 md:flex flex-col items-center gap-12 hidden">
+        <div className="w-1/2 h-full bg-quarternary/60 pl-10 pr-32 py-16 xl:flex flex-col items-center gap-12 hidden">
           <div className="flex items-center self-start gap-4">
             {contact.map((item, index) => (
               <motion.div
