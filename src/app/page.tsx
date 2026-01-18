@@ -47,10 +47,6 @@ export default function Home() {
         <ContactElement theme={resolvedTheme as string} />
       </AnimateSection>
 
-      <div className="bg-purple-black h-32 md:h-20 w-full flex items-start md:items-center justify-center px-2 py-5">
-        <h6 className="text-white">&copy; 2025 Vera Soniya</h6>
-      </div>
-
       {/* <ModalOnDev
         open={isModalOnDev}
         onOpenChange={() => setIsModalOnDev(false)}

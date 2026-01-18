@@ -15,44 +15,82 @@ import { useActiveHashStore } from '@/store/use-active-hash-store';
 const Navbar = () => {
   const { activeHash, setActiveHash } = useActiveHashStore();
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      setActiveHash(window.location.hash);
-    };
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange();
+  // useEffect(() => {
+  //   const handleHashChange = () => {
+  //     setActiveHash(window.location.hash);
+  //   };
+  //   window.addEventListener('hashchange', handleHashChange);
+  //   handleHashChange();
 
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  //   return () => window.removeEventListener('hashchange', handleHashChange);
+  // }, []);
+
+  // useEffect(() => {
+  //   const sections = menus.map((menu) => document.querySelector(menu.href));
+
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           const id = `#${entry.target.id}`;
+  //           setActiveHash(id);
+  //           // history.replaceState(null, '', id);
+  //         }
+  //       });
+  //     },
+  //     {
+  //       root: null,
+  //       rootMargin: '-80px 0px -50% 0px',
+  //       threshold: 0,
+  //     }
+  //   );
+
+  //   sections.forEach((section) => {
+  //     if (section) observer.observe(section);
+  //   });
+
+  //   return () => {
+  //     sections.forEach((section) => {
+  //       if (section) observer.unobserve(section);
+  //     });
+  //   };
+  // }, []);
 
   useEffect(() => {
-    const sections = menus.map((menu) => document.querySelector(menu.href));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = `#${entry.target.id}`;
-            setActiveHash(id);
-            history.replaceState(null, '', id);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.8,
+    let observer: IntersectionObserver | null = null;
+
+    const initObserver = () => {
+      const sections = menus
+        .map((menu) => document.querySelector(menu.href))
+        .filter(Boolean) as HTMLElement[];
+
+      if (sections.length === 0) {
+        requestAnimationFrame(initObserver);
+        return;
       }
-    );
 
-    sections.forEach((section) => {
-      if (section) observer.observe(section);
-    });
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = `#${entry.target.id}`;
+              setActiveHash(id);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: '-80px 0px -50% 0px',
+          threshold: 0,
+        }
+      );
 
-    return () => {
-      sections.forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
+      sections.forEach((section) => observer!.observe(section));
     };
+
+    initObserver();
+
+    return () => observer?.disconnect();
   }, []);
 
   return (
@@ -78,7 +116,15 @@ const Navbar = () => {
                     <Link
                       href={menu.href}
                       className="flex gap-2 items-center text-sm"
-                      onClick={() => setActiveHash(menu.href)}
+                      onClick={() => {
+                        if (menu.href === '#home') {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          setActiveHash('#home');
+                          return;
+                        } else {
+                          setActiveHash(menu.href);
+                        }
+                      }}
                     >
                       {/* {isActive && (
                         <menu.icon
@@ -117,7 +163,15 @@ const Navbar = () => {
                     <Link
                       href={menu.href}
                       className="flex gap-2 items-center"
-                      onClick={() => setActiveHash(menu.href)}
+                      onClick={() => {
+                        if (menu.href === '#home') {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          setActiveHash('#home');
+                          return;
+                        } else {
+                          setActiveHash(menu.href);
+                        }
+                      }}
                     >
                       <menu.icon className="w-4 h-4" />
                       {isActive && (
