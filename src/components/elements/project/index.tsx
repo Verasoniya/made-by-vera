@@ -69,8 +69,8 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
           >
             <Carousel
               opts={{
-                align: 'end',
-                loop: true,
+                align: 'center',
+                loop: false,
               }}
               plugins={[
                 Autoplay({
@@ -80,7 +80,7 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
               className="w-[86vw] xl:w-[80vw] space-x-3"
             >
               <CarouselContent
-                className={`flex justify-center items-center mx-2 ${
+                className={`flex items-center mx-2 ${
                   isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
                 }`}
               >
