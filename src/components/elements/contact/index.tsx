@@ -47,7 +47,7 @@ const ContactElement = ({ theme }: ContactElementProps) => {
 
   const handleToMail = () => {
     window.open(
-      `https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRnZVnHqCMhRTbCMkGGBkrtGzZqHKkPDzVdPDqzKhtZSWNRBgwkSXQTKTqbmPJvlPvzlGgv`
+      `https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRnZVnHqCMhRTbCMkGGBkrtGzZqHKkPDzVdPDqzKhtZSWNRBgwkSXQTKTqbmPJvlPvzlGgv`,
     );
   };
 
@@ -58,7 +58,7 @@ const ContactElement = ({ theme }: ContactElementProps) => {
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         data,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       )
       .then(() => {
         setIsModalLoading(false);
@@ -93,15 +93,14 @@ const ContactElement = ({ theme }: ContactElementProps) => {
   return (
     <>
       <div
-        className={`relative w-full flex justify-end ${
-          isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
-        }`}
+        className={`relative w-full flex justify-end h-screen'
+        `}
       >
         <Image
           src={paper5Image}
           alt="paper"
           className={`w-full object-cover ${
-            isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
+            isMobile || isTablet ? 'h-screen' : 'h-screen'
           }`}
         />
         <div className="absolute top-0 w-full h-full flex flex-col xl:flex-row items-center justify-center">

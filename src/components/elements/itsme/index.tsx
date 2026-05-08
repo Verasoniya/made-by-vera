@@ -26,18 +26,18 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
     theme === 'light'
       ? [Paper1, Paper2]
       : isMobile || isTablet
-      ? [Paper1Mb, Paper2MbDark]
-      : [Paper1, Paper2Dark];
+        ? [Paper1Mb, Paper2MbDark]
+        : [Paper1, Paper2Dark];
   const molufeiImage =
     theme === 'light'
       ? isMobile || isTablet
         ? PinkMolufei
         : Molufei
       : isMobile || isTablet
-      ? PinkMolufei
-      : MolufeiDark;
+        ? PinkMolufei
+        : MolufeiDark;
   return (
-    <div className="relative w-full">
+    <div className="relative w-full z-10">
       {isMobile || isTablet ? null : (
         <motion.div
           initial={{ opacity: 0, y: 0 }}
@@ -59,7 +59,7 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
               initial={{ opacity: 0, y: 1.4, x: 1.4, scale: 1.4 }}
               animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
               transition={{ duration: 0.8, delay: index * 0.6 }}
-              className="w-full absolute top-0"
+              className="w-full absolute top-0 z-0"
             >
               <Image
                 src={paper}
@@ -72,11 +72,11 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
         style={{
           backgroundImage:
             isMobile || isTablet ? `url(${paper5Image.src})` : 'none',
-          opacity: isMobile || isTablet ? 0.8 : 0,
+          opacity: isMobile || isTablet ? 0.8 : 1,
         }}
-        className={`w-full bottom-0 md:top-0 flex flex-col md:flex-row justify-center xl:justify-end items-center h-full px-5 md:px-16 xl:px-32 ${
-          isMobile || isTablet ? 'relative py-20' : 'absolute'
-        }`}
+        className={`w-full bottom-0 md:top-0 flex flex-col md:flex-row justify-center xl:justify-end items-center h-full px-5 md:px-16 xl:px-32
+         ${isMobile || isTablet ? 'relative py-20' : 'absolute'}
+       z-20`}
       >
         {/* {isMobile || isTablet ? (
           <motion.div
@@ -116,10 +116,10 @@ const ItsMeElement = ({ theme }: ContactElementProps) => {
             className="space-y-2 md:space-y-4"
           >
             <h3 className="text-4xl xl:text-5xl text-center md:text-start">
-              Hi
+              Hi,
             </h3>
             <h3 className="text-5xl xl:text-7xl font-montserrat font-semibold">
-              I&lsquo;ts{' '}
+              I&lsquo;m{' '}
               <span className="text-secondary font-montserrat">
                 Vera Soniya
               </span>

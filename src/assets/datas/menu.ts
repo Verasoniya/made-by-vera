@@ -12,17 +12,17 @@ export const menus = [
     icon: Home,
   },
   {
-    name: 'Experience',
+    name: 'What I Do',
     href: '#experience',
     icon: UserRoundSearch,
   },
   {
-    name: 'Projects',
+    name: `Stuff I've Built`,
     href: '#projects',
     icon: BriefcaseBusiness,
   },
   {
-    name: 'Contact',
+    name: 'Get in Touch',
     href: '#contact',
     icon: Palette,
   },
