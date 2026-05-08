@@ -22,13 +22,15 @@ const ProjectCard = ({
           data.image ? '' : 'bg-[#F5F5F5] p-2'
         }`}
       >
-        <Image
-          src={data.image || DefaultImage}
-          alt="project-image"
-          className={`rounded-t-xl ${
-            data.image ? 'object-cover h-full' : 'w-32 h-full'
-          }`}
-        />
+        <div className="relative w-full h-48 md:h-56 overflow-hidden bg-gray-100 rounded-t-xl">
+          <Image
+            src={data.image || DefaultImage}
+            alt={`image-${data.name}`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover object-center transition-transform duration-300 hover:scale-105 rounded-t-xl"
+          />
+        </div>
         <div className="absolute top-2 left-2">
           <Badge label={data.type || ''} />
         </div>
@@ -48,6 +50,7 @@ const ProjectCard = ({
                 src={item.icon}
                 alt="tech-icon"
                 className="w-6 h-6"
+                width={24}
               />
             );
           })}

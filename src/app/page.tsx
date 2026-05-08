@@ -8,12 +8,29 @@ import { useTheme } from 'next-themes';
 import ItsMeElement from '@/components/elements/itsme';
 import ExperienceElement from '@/components/elements/experience';
 import ProjectElement from '@/components/elements/project';
+import { fetchProjects } from '@/hooks/use-projects';
+import { formatProjectsData } from '@/utils/formattedProjects';
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
 
   const [mounted, setMounted] = useState(false);
   const [isModalOnDev, setIsModalOnDev] = useState(false);
+  const [projects, setProjects] = useState([]);
+
+  const getProjectsList = async () => {
+    try {
+      const data = await fetchProjects();
+      const formatted = formatProjectsData(data);
+      setProjects(formatted as any);
+    } catch (err) {
+      console.log(`Project List Error: ${err}`);
+    }
+  };
+
+  useEffect(() => {
+    getProjectsList();
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -40,7 +57,7 @@ export default function Home() {
       </AnimateSection>
 
       <AnimateSection id="projects">
-        <ProjectElement theme={resolvedTheme as string} />
+        <ProjectElement theme={resolvedTheme as string} projects={projects} />
       </AnimateSection>
 
       <AnimateSection id="contact">

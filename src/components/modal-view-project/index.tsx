@@ -38,13 +38,17 @@ const ModalViewProject = ({
               data.image ? '' : 'border border-secondary/30'
             }`}
           >
-            <Image
-              src={data.image || DefaultImage}
-              alt="image-project"
-              className={`w-full h-52 self-center rounded-lg ${
-                data.image ? 'object-cover p-0' : 'object-contain p-2'
-              }`}
-            />
+            <div className="relative w-full h-48 md:h-56 overflow-hidden bg-gray-100">
+              <Image
+                src={data.image || DefaultImage}
+                alt={`image-${data.name}`}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className={`w-full h-52 self-center rounded-lg ${
+                  data.image ? 'object-cover p-0' : 'object-contain p-2'
+                }`}
+              />
+            </div>
             {data.url && (
               <Button
                 variant={'secondary'}

@@ -1,14 +1,13 @@
 'use client';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { projects } from '@/assets/datas/projects';
 import ProjectCard from '@/components/project-card';
 
 import Paper3 from '@/assets/svg/paper-3.svg';
@@ -20,11 +19,13 @@ import useDevice from '@/hooks/use-device';
 
 type ContactElementProps = {
   theme: string;
+  projects: any;
 };
 
-const ProjectElement = ({ theme }: ContactElementProps) => {
+const ProjectElement = ({ theme, projects }: ContactElementProps) => {
   const paper3Image = theme === 'light' ? Paper3 : Paper3Dark;
   const paper4Image = theme === 'light' ? Paper4 : Paper4Dark;
+
   const [selectedProject, setSelectedProject] = useState([]);
   const [isModalViewProject, setIsModalViewProject] = useState(false);
   const { isMobile, isTablet } = useDevice();
@@ -33,6 +34,7 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
     setSelectedProject(project);
     setIsModalViewProject(true);
   };
+
   return (
     <div
       className={`relative w-full ${
@@ -84,7 +86,7 @@ const ProjectElement = ({ theme }: ContactElementProps) => {
                   isMobile || isTablet ? 'h-[80vh]' : 'h-screen'
                 }`}
               >
-                {projects.map((item, index) => (
+                {projects.map((item: any, index: number) => (
                   <CarouselItem
                     key={index}
                     className="basis-[94%] md:basis-[60vw] lg:basis-[50%] xl:basis-1/3 px-2 md:px-6 h-fit pb-2"
