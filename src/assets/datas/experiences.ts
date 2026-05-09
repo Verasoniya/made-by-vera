@@ -5,7 +5,7 @@ export const experiences = [
     role: '(Frontend Developer)',
     office: 'PT. Solusi Eksplorasi Rembulan Utama',
     description:
-      'Developed web applications with React JS, Next JS, and Nuxt JS, working closely  with fellow FE, UI/UX, and QA from wireframing to full implementation. (Projects: Fuel Management System, Ultahku, Equity Life, Databudi, Pritha, CMS Barangkulakan)',
+      'Developed and maintained responsive web and mobile applications using React JS, Next JS, Nuxt JS, and React Native. Collaborated closely with cross-functional teams (UI/UX, QA, PM, and Backend) from initial wireframing to full production release. Focused on building reusable components, integrating RESTful APIs, and translating Figma designs into user-friendly interfaces. (Projects: Fuel Management System, KulakanPay, P-MAP, BP-Ticketing, BCA Trend Micro, Pritha, CMS Barangkulakan, Ultahku, Databudi).',
   },
   {
     id: 1,
@@ -13,7 +13,7 @@ export const experiences = [
     role: '(Frontend Developer)',
     office: 'PT. Kimu Andalan Nusantara (Outsourced from PT.SERU)',
     description:
-      'Developed Android mobile application using React Native. (Projects: Rangkul Grosir, Barangkulakan, Rangkul Delman, Rangkul Sales)',
+      'Focused on mobile application development using React Native. Collaborated with the product team to translate UI/UX designs into seamless mobile screens, developed reusable components to speed up development cycles, and integrated backend APIs to ensure smooth data delivery and a high-quality user experience.(Projects: Rangkul Grosir, Barangkulakan, Rangkul Delman, Rangkul Sales).',
   },
   {
     id: 2,
@@ -21,6 +21,6 @@ export const experiences = [
     role: '(Frontend Developer)',
     office: 'PT. Vinotek Integrasi Digital',
     description:
-      'Developed web application using Next JS and Tailwind CSS. (Projects: Link v.2, Nusameta, )',
+      'Developed high-performance web applications leveraging React JS and Next JS. Worked in an agile environment alongside Backend, UI/UX, QA, and Product Managers to transform design mockups into pixel-perfect, interactive code, ensuring intuitive user-flows and seamless data integration. (Projects: Link v.2, Nusameta).',
   },
 ];
