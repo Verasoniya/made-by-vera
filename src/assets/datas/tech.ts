@@ -5,11 +5,11 @@ import VueJsIcon from '@/assets/svg/vue.svg';
 
 export const techList = [
   {
-    label: 'Vue JS',
+    label: 'Vue.js',
     icon: VueJsIcon,
   },
   {
-    label: 'Nuxt JS',
+    label: 'Nuxt.js',
     icon: NuxtJsIcon,
   },
   {
@@ -17,11 +17,11 @@ export const techList = [
     icon: ReactJsIcon,
   },
   {
-    label: 'React JS',
+    label: 'React.js',
     icon: ReactJsIcon,
   },
   {
-    label: 'Next JS',
+    label: 'Next.js',
     icon: NextJsIcon,
   },
 ];

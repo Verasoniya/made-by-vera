@@ -72,7 +72,7 @@ const ModalViewProject = ({
                       <Image
                         src={item.icon}
                         alt="tech-icon"
-                        className="w-6 h-6"
+                        className="w-6 h-6 object-contain"
                       />
                     </MainTooltip>
                   );
