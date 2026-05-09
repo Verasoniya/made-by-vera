@@ -9,6 +9,7 @@ import JavaScriptIcon from '@/assets/svg/javascript.svg';
 import AxiosIcon from '@/assets/svg/axios.png';
 import FigmaIcon from '@/assets/svg/figma.png';
 import RestfulApiIcon from '@/assets/svg/restful-api.png';
+import HighchartsIcon from '@/assets/svg/highcharts-logo.svg';
 
 export const iconMap: Record<string, string | any> = {
   'React.js': ReactJsIcon,
@@ -23,4 +24,5 @@ export const iconMap: Record<string, string | any> = {
   Axios: AxiosIcon,
   'RESTful API': RestfulApiIcon,
   'Shadcn UI': ShadcnIcon,
+  Highcharts: HighchartsIcon,
 };

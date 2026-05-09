@@ -14,7 +14,7 @@ export const formatProjectsData = (rawSheetsData: any[]) => {
       : [];
 
     const jobdescArray = item.jobdesc
-      ? item.jobdesc.split('.').map((desc: string, idx: number) => {
+      ? item.jobdesc.split('. ').map((desc: string, idx: number) => {
           return {
             id: idx,
             label: desc.trim(),
