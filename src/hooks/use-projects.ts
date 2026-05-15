@@ -2,7 +2,7 @@ const baseUrl = process.env.NEXT_PUBLIC_RAW_GITHUB_URL;
 export const fetchProjects = async () => {
   try {
     const response = await fetch(
-      `${baseUrl}/Verasoniya/portfolio-assets-vera/refs/heads/main/projects.json`,
+      `${baseUrl}/Verasoniya/portfolio-assets-vera/main/projects.json`,
     );
     if (!response.ok) {
       throw new Error('Gagal mengambil data proyek');
