@@ -10,6 +10,7 @@ import ExperienceElement from '@/components/elements/experience';
 import ProjectElement from '@/components/elements/project';
 import { fetchProjects } from '@/hooks/use-projects';
 import { formatProjectsData } from '@/utils/formattedProjects';
+import { toast } from 'sonner';
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
@@ -25,6 +26,9 @@ export default function Home() {
       setProjects(formatted as any);
     } catch (err) {
       console.log(`Project List Error: ${err}`);
+      toast.error('Error!', {
+        description: 'Project List Error: Something went wrong.',
+      });
     }
   };
 
